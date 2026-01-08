@@ -1,18 +1,40 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VisitorForm from "./components/VisitorForm";
 import VisitorList from "./components/VisitorList";
 
 export default function Home() {
   const [visitors, setVisitors] = useState([]);
 
-  const addVisitor = (visitor) => {
-    setVisitors([...visitors, visitor]);
+  const fetchVisitors = async () => {
+    const res = await fetch("./api/visitors");
+    const responseText = await res.text();
+    if(responseText){const data = JSON.parse(responseText);
+    setVisitors(data);
+  }
+    
   };
 
-  const deleteVisitor = (index) => {
-    const updated = visitors.filter((_, i) => i !== index);
-    setVisitors(updated);
+  useEffect(() => {
+    fetchVisitors();
+  }, []);
+
+  const addVisitor = async (visitor: any) => {
+    await fetch("/api/visitors", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(visitor),
+    });
+    fetchVisitors();
+  };
+
+  const deleteVisitor = async (id: any) => {
+    await fetch("/api/visitors", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    fetchVisitors();
   };
 
   return (

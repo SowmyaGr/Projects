@@ -1,6 +1,5 @@
 export const metadata = {
-  title: "Visitor Management",
-  description: "Visitor Form Management App",
+  title: "Visitor Management System",
 };
 
 export default function RootLayout({ children }) {
