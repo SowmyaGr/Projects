@@ -30,12 +30,12 @@ export default function VisitorList({ visitors, deleteVisitor }) {
               </td>
 
               <td className="border p-2">
-                <button
+                {/* <button
                   onClick={() => deleteVisitor(v._id)}
                   className="bg-red-500 text-white px-3 py-1 rounded"
                 >
                   Delete
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}

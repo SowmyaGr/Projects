@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const VisitorSchema = new mongoose.Schema({
+  visitorId: {
+    type: String,
+    unique: true,
+  },
   name: String,
   purpose: String,
   date: String,
